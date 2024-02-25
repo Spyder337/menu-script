@@ -47,10 +47,10 @@ def help_msg(cmd: Command) -> str:
 
 def can_execute(cmd: Command, args: ...) -> bool:
     """Checks if the arguments are valid for the command."""
-        # print("can_execute")
-        # print(f"Vairable Len:   {self.args.variable_len}")
-        # print(f"Min Args:       {self.args.num_vals}")
-        # print(f"Args Passed In: {len(args)}")
+    # print("can_execute")
+    # print(f"Vairable Len:   {self.args.variable_len}")
+    # print(f"Min Args:       {self.args.num_vals}")
+    # print(f"Args Passed In: {len(args)}")
     if (not cmd.args.variable_len and len(args) == cmd.args.num_vals):
         return True
     if cmd.args.variable_len:
@@ -95,7 +95,7 @@ def parse_args(menu: Menu, args: ...):
     """Execute valid commands."""
     if args[0] in menu.cmds:
         flag = args[0]
-        menu.cmds[flag].execute(menu, args[1:])
+        menu.cmds[flag].cmd_exec(menu, args[1:])
 
 
 # Common Callbacks
@@ -106,11 +106,11 @@ def help_exec(menu: Menu, args: ...):
     if len(args) == 0:
         print("Commands: ")
         for cmd in menu.cmds.values():
-            print(cmd.help_msg(), end='')
+            print(help_msg(cmd), end='')
     elif args[0] in menu.cmds:
         flag = args[0]
         print(f"Command Help: {flag}")
-        print(menu.cmds[flag].help_msg(), end='')
+        print(help_msg(menu.cmds[flag]), end='')
     else:
         print("Invalid arguments.\nNone for all commands. Command flag for specific help.")
 
